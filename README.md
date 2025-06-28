@@ -1,1 +1,3 @@
 # rock-paper-scissors
+
+This is a simple Rock Paper Scissors game built using plain JavaScript and played entirely in the browser console. It was created as a beginner project to practice core programming concepts like functions, conditionals, loops, and random number generation. When you open the HTML file in a browser and access the console, the game prompts you to enter your choice (rock, paper, or scissors), and the computer randomly selects its own. The first to reach five points wins. This project helped reinforce my understanding of basic JavaScript logic and console interaction, and it serves as a foundation for future improvements like adding a graphical user interface, button controls, and score display on the webpage.
