@@ -1,12 +1,16 @@
 
 //declaring variables
 const months = ["rock", "paper", "scissor"];
-let random,myinput;
+let random;
 let round = 0;
-let player_select,computer_select
+let player_select = 'none'
+let computer_select = ''
 let player_score=0,computer_score = 0;
 let round_result = '';
 
+
+let myinputoption =document.querySelectorAll('.option')
+let player = document.getElementById('player')
 
 // getting computer choice
  
@@ -17,10 +21,26 @@ function getcomputerchoice() {
 
 
 // getting player choice
+function handleclick(option) {
+        player_select = option.target.innerHTML;
+        player.textContent = player_select      
+
+        myinputoption.forEach((e)=> {
+            e.removeEventListener('click',handleclick)
+        })
+    }
+
 function getmyinput() {
-    myinput = prompt("select rock,paper or scissor")
-    return myinput
+    myinputoption.forEach((e)=> {
+        e.addEventListener('click',handleclick)
+    })
+
 }
+
+getmyinput()
+
+
+
 
 // making the logic
 // a round first player select using prompt then computer also select stores in a vairable
@@ -28,8 +48,9 @@ function getmyinput() {
 
 function Round() {
     round = round+1;
-    player_select = getmyinput();
-    computer_select = getcomputerchoice();
+    // player_select = getmyinput();
+    // computer_select = getcomputerchoice();
+
     
     //rps logic
     if(player_select == "rock" && computer_select == "rock" || 
@@ -89,26 +110,28 @@ function Round() {
     console.log(`number of rounds ${round}`);
 }
 
+
+
 // making 5 rounds
 function loopround() {
-    for (let i=1;i<=5;i++) {
-        Round()
-        // adding score
-        if (round_result == "none") {
-            player_score = player_score+0;
-            computer_score = computer_score +0;
-        }
-        else if (round_result == "player_win") {
-            player_score = player_score+1;
-            computer_score = computer_score +0;            
-        }
-        else if (round_result == "computer_win") {
-            player_score = player_score+0;
-            computer_score = computer_score +1;  
-        }
-        console.log("");
+    // for (let i=1;i<=5;i++) {
+    //     Round()
+    //     // adding score
+    //     if (round_result == "none") {
+    //         player_score = player_score+0;
+    //         computer_score = computer_score +0;
+    //     }
+    //     else if (round_result == "player_win") {
+    //         player_score = player_score+1;
+    //         computer_score = computer_score +0;            
+    //     }
+    //     else if (round_result == "computer_win") {
+    //         player_score = player_score+0;
+    //         computer_score = computer_score +1;  
+    //     }
+    //     console.log("");
         
-    }
+    // }
 
     // making the final result
     console.log(`player score : ${player_score}`);
@@ -120,7 +143,7 @@ function loopround() {
     else if (player_score < computer_score) {
         alert("computer wins the game")
     }else {
-        alert("the game ended in a draw")
+        // alert("the game ended in a draw")
     }
 }
 
