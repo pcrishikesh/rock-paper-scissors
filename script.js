@@ -44,9 +44,7 @@ function handler(element) {
         btn.removeEventListener('click', handler)
         })
         checkResult()
-        setTimeout(()=> document.querySelector('body').style.display = 'none',3000)
-        
-        
+        setTimeout(()=> document.querySelector('body').style.display = 'none',3000)   
     }
         
 

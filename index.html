@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rock-paper-scissors</title>
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
 
-    <h1>rock paper scissors</h1>
+    <h1 class="head">ROCK PAPER SCISSOR</h1>
 
     <div class="contain">
         <button class="option" id="rock">rock</button>
@@ -15,17 +16,17 @@
         <button class="option" id="scissor">scissor</button>
     </div>
 
-    <h1>player input : <span id="player"></span></h1>
-    <h1>computer input : <span id="computer"></span></h1>
+    <h1 class="playerh1">player input : <span id="player"></span></h1>
+    <h1 class="playerh1">computer input : <span id="computer"></span></h1>
 
 
     <div id="result">
-        <h1>result</h1>
+        <h1>Result</h1>
         <h2>Round <span id="roundid">0</span>/5</h2>
         <h2 id="playersel">player selection : <span id="player_selection"></span></h2>
         <h2 id="computersel">computer selection : <span id="computer_selection"></span></h2>
     </div>
         <h2 style="display: none;" id="game">The game ends in <span id="gamefinish"></span></h2>   
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
