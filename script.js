@@ -78,8 +78,14 @@ function domResult(final,playerdom,computerdom) {
     
 }
 
-function resultCalculator() {
-
+function resultCalculator(result) {
+    if (result == "computer") {
+        computer_score = computer_score + 1
+    }
+    else if(result == "player") {
+        player_score = player_score + 1
+    }
+    
 }
 
 async function gameLogic(player_select,computer_select) {
@@ -90,18 +96,25 @@ async function gameLogic(player_select,computer_select) {
         (player_select == "scissor" && computer_select == "scissor")
     ) {
         domResult('same',player_select,computer_select)
+        resultCalculator('same')
     } else if (player_select == "rock" && computer_select == "paper") {
         domResult('computer win',player_select,computer_select)
+        resultCalculator('computer')
     } else if (player_select == "rock" && computer_select == "scissor") {
         domResult('player win',player_select,computer_select)
+        resultCalculator('player')
     } else if (player_select == "paper" && computer_select == "rock") {
         domResult('player win',player_select,computer_select)
+        resultCalculator('player')
     } else if (player_select == "paper" && computer_select == "scissor") {
         domResult('computer win',player_select,computer_select)
+        resultCalculator('computer')
     } else if (player_select == "scissor" && computer_select == "rock") {
         domResult('computer win',player_select,computer_select)
+        resultCalculator('computer')
     } else if (player_select == "scissor" && computer_select == "paper") {
         domResult('player win',player_select,computer_select)
+        resultCalculator('player')
     } else {
         domResult('none',player_select,computer_select)
     }
