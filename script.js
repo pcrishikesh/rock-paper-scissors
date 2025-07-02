@@ -37,11 +37,16 @@ function handler(element) {
     //game logic
     getcomputerchoice()
     gameLogic(player,computer)
-    round = round + 1    
+    round = round + 1   
+    document.getElementById('roundid').textContent = round 
     if (round >= 5) {
         players.forEach(btn => {
         btn.removeEventListener('click', handler)
         })
+        checkResult()
+        setTimeout(()=> document.querySelector('body').style.display = 'none',3000)
+        
+        
     }
         
 
@@ -88,6 +93,24 @@ function resultCalculator(result) {
     
 }
 
+function checkResult() {
+    let final = document.getElementById('gamefinish')
+    let gameresult = document.getElementById('game')
+    if (round >= 5) {
+        if (player_score > computer_score) {
+            gameresult.style.display = 'block'
+            final.textContent = 'Player Winning'
+        }
+        else if (player_score < computer_score) {
+            gameresult.style.display = 'block'
+            final.textContent = 'Computer Winning'
+        }else {
+            gameresult.style.display = 'block'
+            final.textContent = 'Draw'
+        }
+    }
+}
+
 async function gameLogic(player_select,computer_select) {
   //rps logic
     if (
@@ -124,41 +147,4 @@ async function gameLogic(player_select,computer_select) {
 
 
 // making 5 rounds
-function loopround() {
-  for (let i=1;i<=5;i++) {
-      Round()
-      // adding score
-      if (round_result == "none") {
-          player_score = player_score+0;
-          computer_score = computer_score +0;
-          console.log(round_result);
-      }
-      else if (round_result == "player_win") {
-        console.log(round_result);
-        
-          player_score = player_score+1;
-          computer_score = computer_score +0;
-      }
-      else if (round_result == "computer_win") {
-          player_score = player_score+0;
-          computer_score = computer_score +1;
-          console.log(round_result);
-      }
-
-  }
-
-  // making the final result
-  console.log(`player score : ${player_score}`);
-  console.log(`computer score : ${computer_score}`);
-
-  if (player_score > computer_score) {
-    alert("player win's the game");
-  } else if (player_score < computer_score) {
-    alert("computer wins the game");
-  } else {
-    // alert("the game ended in a draw")
-  }
-}
-
-loopround()
-
+Round()
