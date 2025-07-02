@@ -27,18 +27,25 @@ let scissor_select = document.getElementById('scissor');
 let players = document.querySelectorAll('.option')
 
 
+
 // its function
 
 function handler(element) {
     player = element.target.innerHTML;
     player_dom.textContent = player
-
+    result_div = document.getElementById('result').style.display = 'block'
     //game logic
+    getcomputerchoice()
     gameLogic(player,computer)
-
-    players.forEach(btn => {
+    round = round + 1    
+    if (round >= 5) {
+        players.forEach(btn => {
         btn.removeEventListener('click', handler)
-    })
+        })
+    }
+        
+
+
 }
 
 
@@ -46,7 +53,6 @@ function getmyinput() {
     return new Promise((resolve) => {
     players.forEach(event=> {
         event.addEventListener('click' ,handler)
-
         resolve();
     })
     });
@@ -56,12 +62,25 @@ function getmyinput() {
 
 async function Round() {
     await getmyinput(); // Wait until button is clicked
-    await getcomputerchoice()
-
 }
-Round();
 
 // making the logic
+
+let result = document.createElement('h2')
+function domResult(final,playerdom,computerdom) {
+    result_div = document.getElementById('result')
+    document.getElementById('computer_selection').textContent = computerdom
+    document.getElementById('player_selection').textContent = playerdom
+
+    result.classList.add('result_element')
+    result.textContent = final
+    result_div.append(result)
+    
+}
+
+function resultCalculator() {
+
+}
 
 async function gameLogic(player_select,computer_select) {
   //rps logic
@@ -70,126 +89,63 @@ async function gameLogic(player_select,computer_select) {
         (player_select == "paper" && computer_select == "paper") ||
         (player_select == "scissor" && computer_select == "scissor")
     ) {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "same";
-        console.log("same");
+        domResult('same',player_select,computer_select)
     } else if (player_select == "rock" && computer_select == "paper") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "computer_win";
-        console.log("computer win");
+        domResult('computer win',player_select,computer_select)
     } else if (player_select == "rock" && computer_select == "scissor") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "player_win";
-        console.log("player win");
+        domResult('player win',player_select,computer_select)
     } else if (player_select == "paper" && computer_select == "rock") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "player_win";
-        console.log("player win");
+        domResult('player win',player_select,computer_select)
     } else if (player_select == "paper" && computer_select == "scissor") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "computer_win";
-        console.log("computer win");
+        domResult('computer win',player_select,computer_select)
     } else if (player_select == "scissor" && computer_select == "rock") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        round_result = "computer_win";
-        console.log("computer win");
+        domResult('computer win',player_select,computer_select)
     } else if (player_select == "scissor" && computer_select == "paper") {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        console.log("player win");
-        round_result = "player_win";
+        domResult('player win',player_select,computer_select)
     } else {
-        console.log(`player selection : ${player_select}`);
-        console.log(`computer selection : ${computer_select}`);
-        console.log("wrong input");
-        round_result = "none";
+        domResult('none',player_select,computer_select)
     }
 }
 // a round first player select using prompt then computer also select stores in a vairable
 // then compare it and update score and round
 
 
+// making 5 rounds
+function loopround() {
+  for (let i=1;i<=5;i++) {
+      Round()
+      // adding score
+      if (round_result == "none") {
+          player_score = player_score+0;
+          computer_score = computer_score +0;
+          console.log(round_result);
+      }
+      else if (round_result == "player_win") {
+        console.log(round_result);
+        
+          player_score = player_score+1;
+          computer_score = computer_score +0;
+      }
+      else if (round_result == "computer_win") {
+          player_score = player_score+0;
+          computer_score = computer_score +1;
+          console.log(round_result);
+      }
 
+  }
 
+  // making the final result
+  console.log(`player score : ${player_score}`);
+  console.log(`computer score : ${computer_score}`);
 
+  if (player_score > computer_score) {
+    alert("player win's the game");
+  } else if (player_score < computer_score) {
+    alert("computer wins the game");
+  } else {
+    // alert("the game ended in a draw")
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // making 5 rounds
-// function loopround() {
-//   // for (let i=1;i<=5;i++) {
-//   //     Round()
-//   //     // adding score
-//   //     if (round_result == "none") {
-//   //         player_score = player_score+0;
-//   //         computer_score = computer_score +0;
-//   //     }
-//   //     else if (round_result == "player_win") {
-//   //         player_score = player_score+1;
-//   //         computer_score = computer_score +0;
-//   //     }
-//   //     else if (round_result == "computer_win") {
-//   //         player_score = player_score+0;
-//   //         computer_score = computer_score +1;
-//   //     }
-//   //     console.log("");
-
-//   // }
-
-//   // making the final result
-//   console.log(`player score : ${player_score}`);
-//   console.log(`computer score : ${computer_score}`);
-
-//   if (player_score > computer_score) {
-//     alert("player win's the game");
-//   } else if (player_score < computer_score) {
-//     alert("computer wins the game");
-//   } else {
-//     // alert("the game ended in a draw")
-//   }
-// }
-
+loopround()
 
